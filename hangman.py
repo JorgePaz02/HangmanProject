@@ -19,23 +19,56 @@ rightarm = BLACK
 leftleg = BLACK
 rightleg = BLACK
 
-START_WIDTH,START_HEIGHT = 100,80
+# START_WIDTH,START_HEIGHT = 100,80
 #GLOBAL VARIABLES- OUR MAIN LISTS
 word = []  #ORIGINAL WORD
 answer = []  #FILLED WITH _ TILL GUESS CORRECT
-screen = pygame.display.set_mode((400,400))
- 
+screen = pygame.display.set_mode((605, 600))
+
+
+# at the start of the game we ask if we want to play
+def drawstart():
+  #button for yes
+  yesbutton = button((WHITE), 200, 90, 200, 30, 'YES')
+  yesbutton.draw(screen)
+
+  #button for no
+  nobutton = button((WHITE), 200, 150, 200, 30, 'NO')
+  nobutton.draw(screen)
+
+  #what to do when the button is clicked below
+  run = True
+  while run:
+    pygame.display.update()
+    for event in pygame.event.get():
+      pos = pygame.mouse.get_pos()
+  
+      if event.type == pygame.QUIT:
+        run =False
+        pygame.quit()
+        quit()
+  # if the button is clicked then do these functions 
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        if yesbutton.isOver(pos):
+          return 1
+        elif nobutton.isOver(pos):
+          return 0
+
+  pygame.display.update()
+
+
+
 #this will draw the hangman and it gets passed the number of lives they have
 def drawHMan(lives):
   screen.fill(BLACK)
   num = lives
   # lets make the post  a regulur button and not give it any action
   postbutton = button((WHITE), 90, 90, 15, 200, '')
-  postbutton.draw(WIN)
+  postbutton.draw(screen)
   pobutton = button((WHITE), 90, 90, 100, 15, '')
-  pobutton.draw(WIN)
+  pobutton.draw(screen)
   potbutton = button((WHITE), 50, 280, 150, 15, '')
-  potbutton.draw(WIN)
+  potbutton.draw(screen)
   # end of drawing out the post 
 
   # lets draw an announcment 
@@ -94,17 +127,21 @@ def drawHMan(lives):
 
 #BEGINS THE GAME
 def gamestart(): 
-  start = pygame.Rect(50,50,START_WIDTH,START_HEIGHT)
-  draw_start(start)
-  pygame.display.update()
-  choice = input("wanna play? ")
-  if choice == 'Y':
-        difficulty()
-  else:
+  startbutton = button((WHITE), 200, 50, 200, 30, 'READY TO START?')
+  startbutton.draw(screen)
+
+  # start = pygame.Rect(50,50,START_WIDTH,START_HEIGHT)
+  # draw_start(start)
+  # pygame.display.update()
+  # choice = input("wanna play? ")
+  # if choice == 'Y':
+  if drawstart() == 1:
+    difficulty()
+  elif drawstart() == 0:
     screen.fill(BLACK)
     #button for playing the game again
-    playbutton = button((WHITE), 250, 250, 400, 30, 'LETS TRY THAT AGAIN! WANNA PLAY?! CLICK HERE!')
-    playbutton.draw(WIN)
+    playbutton = button((WHITE), 250, 200, 500, 30, 'LETS TRY THAT AGAIN! WANNA PLAY?! CLICK HERE!')
+    playbutton.draw(screen)
     #what to do when the button is clicked below
     run = True
     while run:
@@ -172,15 +209,15 @@ def easyClick():
 # buttons for the categories
   #button for food
   foodbutton = button((WHITE), 90, 250, 100, 30, 'food')
-  foodbutton.draw(WIN)
+  foodbutton.draw(screen)
 
   #button for transportation
   transbutton = button((WHITE), 250, 250, 100, 30, 'transport')
-  transbutton.draw(WIN)
+  transbutton.draw(screen)
 
   #button for colors
   colbutton = button((WHITE), 400, 250, 100, 30, 'colors')
-  colbutton.draw(WIN)
+  colbutton.draw(screen)
 # end of buttons
 # button actions
   run = True
@@ -223,15 +260,15 @@ def medClick():
 # buttons for the categories
   #button for food
   foodbutton = button((WHITE), 90, 250, 100, 30, 'food')
-  foodbutton.draw(WIN)
+  foodbutton.draw(screen)
 
   #button for color
   colbutton = button((WHITE), 250, 250, 100, 30, 'color')
-  colbutton.draw(WIN)
+  colbutton.draw(screen)
 
   #button for clothing
   clothbutton = button((WHITE), 400, 250, 100, 30, 'cloth')
-  clothbutton.draw(WIN)
+  clothbutton.draw(screen)
 # end of buttons
   
 # button actions
@@ -274,11 +311,11 @@ def hardClick():
 #buttons for the categories
   #button for food
   foodbutton = button((WHITE), 90, 250, 100, 30, 'food')
-  foodbutton.draw(WIN)
+  foodbutton.draw(screen)
 
   #button for colors
   colbutton = button((WHITE), 250, 250, 100, 30, 'colors')
-  colbutton.draw(WIN)
+  colbutton.draw(screen)
 # end of buttons
 
 # button actions
@@ -319,15 +356,15 @@ def difficulty():
 
   #button for easy
   easybutton = button((WHITE), 90, 250, 100, 30, 'E')
-  easybutton.draw(WIN)
+  easybutton.draw(screen)
 
   #button for medium
   medbutton = button((WHITE), 250, 250, 100, 30, 'M')
-  medbutton.draw(WIN)
+  medbutton.draw(screen)
 
   #button for hard
   hardbutton = button((WHITE), 400, 250, 100, 30, 'H')
-  hardbutton.draw(WIN)
+  hardbutton.draw(screen)
 
   #what to do when the button is clicked below
   run = True
@@ -370,7 +407,7 @@ def letter(list):
   # this is a test
   # print("The list after appending is : " + str(list))
   letterbutton = button((WHITE), 50, 10, 500, 30, "used letters" + str(list))
-  letterbutton.draw(WIN)
+  letterbutton.draw(screen)
 
   pygame.display.update()
 
@@ -450,7 +487,7 @@ def Gameover():
   screen.blit(text, text_rect)
   #button for playing the game again
   playbutton = button((WHITE), 250, 250, 300, 30, 'WANNA PLAY AGAIN? CLICK HERE')
-  playbutton.draw(WIN)
+  playbutton.draw(screen)
   #what to do when the button is clicked below
   run = True
   while run:
@@ -488,7 +525,7 @@ def winEndgame():
   pygame.display.update()
   #button for playing the game again
   playbutton = button((WHITE), 250, 250, 300, 30, 'WANNA PLAY AGAIN? CLICK HERE!')
-  playbutton.draw(WIN)
+  playbutton.draw(screen)
 
    #what to do when the button is clicked below
   run = True

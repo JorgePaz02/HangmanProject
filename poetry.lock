@@ -23,6 +23,17 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "draw-devops-against-humanity"
+version = "0.0.4"
+description = "Draw devops against humanity sentence."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.extras]
+tests = ["py (>=1.4.26)", "pyflakes (==1.1.0)", "pytest (>=3.0.7)", "pytest-cache (>=1.0)", "pytest-cov (>=2.1.0)", "pytest-flakes (>=1.0.1)", "pytest-isort (==0.1.0)", "pytest-pep8 (>=1.0.6)", "coverage (>=4.0)", "pep8 (>=1.6.2)", "tox", "tox-pyenv"]
+
+[[package]]
 name = "jedi"
 version = "0.18.1"
 description = "An autocompletion tool for Python that can be used for text editors."
@@ -222,12 +233,13 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8.0,<3.9"
-content-hash = "e1b32ab76b43113542f325e312966ffe3107ccd81a8789bd4106b0b352afc38d"
+content-hash = "6d9a92b1dff191e513f5c0c8544987fa89f05508cb1be56a6905d2746e936fb1"
 
 [metadata.files]
 alien-invasion1 = []
 debugpy = []
 docstring-to-markdown = []
+draw-devops-against-humanity = []
 jedi = []
 packaging = []
 parso = []
