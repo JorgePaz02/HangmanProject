@@ -28,6 +28,14 @@ screen = pygame.display.set_mode((605, 600))
 
 # at the start of the game we ask if we want to play
 def drawstart():
+    #uploading the background image
+  CORN_IMAGE = pygame.image.load("scary_image.jpg")
+  #creating the size of the image
+  CORN_IMAGE = pygame.transform.scale(CORN_IMAGE, (600, 600))
+  screen.blit(CORN_IMAGE, (0, 0))
+  startbutton = button((WHITE), 200, 50, 200, 30, 'READY TO START?')
+  startbutton.draw(screen)
+
   #button for yes
   yesbutton = button((WHITE), 200, 90, 200, 30, 'YES')
   yesbutton.draw(screen)
@@ -129,7 +137,7 @@ def drawHMan(lives):
 def gamestart(): 
   startbutton = button((WHITE), 200, 50, 200, 30, 'READY TO START?')
   startbutton.draw(screen)
-
+  # answer.clear()
   # start = pygame.Rect(50,50,START_WIDTH,START_HEIGHT)
   # draw_start(start)
   # pygame.display.update()
@@ -140,7 +148,7 @@ def gamestart():
   elif drawstart() == 0:
     screen.fill(BLACK)
     #button for playing the game again
-    playbutton = button((WHITE), 250, 200, 500, 30, 'LETS TRY THAT AGAIN! WANNA PLAY?! CLICK HERE!')
+    playbutton = button((WHITE), 50, 190, 500, 30, 'LETS TRY THAT AGAIN >:(! WANNA PLAY?! CLICK HERE!')
     playbutton.draw(screen)
     #what to do when the button is clicked below
     run = True
@@ -160,6 +168,8 @@ def gamestart():
             
  #SETS UP THE WORD FOR THE GAME. MAY BE UPDATED WITH RANDOMIZER
 def wordset(fileName): 
+    word.clear()  #ORIGINAL WORD
+    answer.clear() #FILLED WITH _ TILL GUESS CORRECT
     list = readfile(fileName)
     #generate a random selection from txt file
     randWord = random.choice(list)
@@ -344,6 +354,21 @@ def hardClick():
 # here is the class that lets them select their difficulty
 def difficulty():
   screen.fill(BLACK)
+# initialize yur hangman to all BLACK
+  global head
+  head = BLACK
+  global body
+  body = BLACK
+  global rightarm
+  rightarm = BLACK
+  global leftarm
+  leftarm = BLACK
+  global leftleg
+  leftleg = BLACK
+  global rightleg
+  rightleg = BLACK
+# end of initialization 
+  # answer.clear()
   statement = font.render("What level of difficulty will you like? ", True, WHITE)
   statement_rect = statement.get_rect()
   statement_rect.center = (300,80)
@@ -480,13 +505,13 @@ def texts(lives):
 def Gameover():
   screen.fill(BLACK)
   pygame.font.init()
-  font = pygame.font.Font("Sono.ttf", 50)
+  font = pygame.font.Font("Sono.ttf", 20)
   text = font.render("GAME OVER YOU RAN OUT OF LIVES!", True, RED)
   text_rect = text.get_rect()
-  text_rect.center = (200,200)
+  text_rect.center = (300,200)
   screen.blit(text, text_rect)
   #button for playing the game again
-  playbutton = button((WHITE), 250, 250, 300, 30, 'WANNA PLAY AGAIN? CLICK HERE')
+  playbutton = button((WHITE), 190, 250, 300, 30, 'WANNA PLAY AGAIN? CLICK HERE')
   playbutton.draw(screen)
   #what to do when the button is clicked below
   run = True
@@ -517,14 +542,14 @@ def wincheck(set, wset):
 def winEndgame():
   screen.fill(BLACK)
   pygame.font.init()
-  font = pygame.font.Font("Sono.ttf", 50)
+  font = pygame.font.Font("Sono.ttf", 20)
   text = font.render("WINNER", True, YELLOW)
   text_rect = text.get_rect()
-  text_rect.center = (200,200)
+  text_rect.center = (300,200)
   screen.blit(text, text_rect)
   pygame.display.update()
   #button for playing the game again
-  playbutton = button((WHITE), 250, 250, 300, 30, 'WANNA PLAY AGAIN? CLICK HERE!')
+  playbutton = button((WHITE), 190, 250, 300, 30, 'WANNA PLAY AGAIN? CLICK HERE!')
   playbutton.draw(screen)
 
    #what to do when the button is clicked below
